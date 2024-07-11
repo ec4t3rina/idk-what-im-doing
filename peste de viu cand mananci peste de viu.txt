@@ -1,0 +1,69 @@
+﻿CHESTII HELPFUL?????
+
+
+https://www.kaggle.com/code/gunesevitan/nlp-with-disaster-tweets-eda-cleaning-and-bert
+Cv disaster tweets si e fct mai de mana asa
+
+
+—--------------------
+
+
+https://www.kaggle.com/code/tanulsingh077/twitter-sentiment-extaction-analysis-eda-and-model
+
+
+def clean_text(text):
+    '''Make text lowercase, remove text in square brackets,remove links,remove punctuation
+    and remove words containing numbers.'''
+    text = str(text).lower()
+    text = re.sub('\[.*?\]', '', text)
+    text = re.sub('https?://\S+|www\.\S+', '', text)
+    text = re.sub('<.*?>+', '', text)
+    text = re.sub('[%s]' % re.escape(string.punctuation), '', text)
+    text = re.sub('\n', '', text)
+    text = re.sub('\w*\d\w*', '', text)
+    return text
+
+
+In plus:
+
+
+train['text'] = train['text'].apply(lambda x:clean_text(x))
+train['selected_text'] = train['selected_text'].apply(lambda x:clean_text(x))
+
+
+A treia linie e legata de a doua btw
+
+
+
+
+Also altcvcu extracion:
+https://www.kaggle.com/code/nkoprowicz/a-simple-solution-using-only-word-counts/notebook
+
+
+
+
+
+
+—----
+
+
+TITLU SI BPDYYY? Vezi summaruization
+
+
+max_input_length = 512
+max_target_length = 30
+
+
+
+
+def preprocess_function(examples):
+    model_inputs = tokenizer(
+        examples["review_body"],
+        max_length=max_input_length,
+        truncation=True,
+    )
+    labels = tokenizer(
+        examples["review_title"], max_length=max_target_length, truncation=True
+    )
+    model_inputs["labels"] = labels["input_ids"]
+    return model_inputs
